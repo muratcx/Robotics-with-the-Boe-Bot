@@ -1,0 +1,141 @@
+' -----[ Title ]-------------------------------------------------------
+' Robotics with the Boe-Bot - IntersectionsBoeBot.bs2
+' Navigate 90 degree left/right, 3-way, and 4-way intersections.
+' Based on StripeFollowingBoeBot.bs2
+' {$STAMP BS2} ' Stamp directive.
+' {$PBASIC 2.5} ' PBASIC directive.
+DEBUG "Program Running!"
+' -----[ Constants ]---------------------------------------------------
+Kpl CON 35 ' Left proportional constant
+Kpr CON -35 ' Right proportional constant
+SetPoint CON 3 ' 0-1 is White, 4-5 is Black
+CenterPulse CON 750
+Turn90Degree CON 30 ' Pulses needed for 90 turn
+RightLED PIN 1 ' LED Indicators
+LeftLED PIN 10
+' -----[ Variables ]---------------------------------------------------
+freqSelect VAR Nib ' Sweep through 5 frequencies
+irFrequency VAR Word ' Freq sent to IR emitter
+irDetectLeft VAR Bit ' Store results from detectors
+irDetectRight VAR Bit
+distanceLeft VAR Nib ' Calculate distance zones
+distanceRight VAR Nib
+pulseLeft VAR Word ' Servo pulseWidths
+pulseRight VAR Word
+numPulses VAR Byte ' Count total pulses
+fwdPulses VAR Byte ' Count forward pulses
+counter VAR Byte
+isStuck VAR Bit ' Boolean variable,is bot stuck?
+
+' -----[ Initialization ]----------------------------------------------
+FREQOUT 4, 2000, 3000
+' -----[ Main Routine ]------------------------------------------------
+DO
+ GOSUB Get_Ir_Distances ' Read IR sensors
+ GOSUB Update_LEDs ' Indicate white/black line
+' Calculate proportional output and move accordingly.
+ pulseLeft = SetPoint - distanceLeft * Kpl + CenterPulse
+ pulseRight = SetPoint - distanceRight * Kpr + CenterPulse
+ GOSUB Send_Pulse
+ GOSUB Check_For_Intersection ' Are we stuck at intersection?
+ IF (isStuck = 1) THEN
+ GOSUB Make_Noise ' Audible indication
+ GOSUB Navigate_Intersection ' Navigate through it
+ ENDIF
+LOOP
+' -----[ Subroutines ]-------------------------------------------------
+Navigate_Intersection:
+' Go forward until both sensors read white, through the intersection.
+ DO
+ pulseLeft = 850: pulseRight = 650 ' Forward
+ GOSUB Send_Pulse
+ GOSUB Get_Ir_Distances
+ GOSUB Update_LEDs
+ LOOP UNTIL (distanceLeft <=2) AND (distanceRight <=2)
+ GOSUB Stop_Quickly ' Don't coast forward
+' Now back up until one detector sees the black.L & R turn will see
+' black on one detector.3- or 4-way will see both black, turn toward
+' whichever the bot sees first (random).
+ DO
+ pulseLeft = 650: pulseRight = 850 ' Backward
+ GOSUB Send_Pulse
+ GOSUB Get_Ir_Distances
+ GOSUB Update_LEDs
+ LOOP UNTIL (distanceLeft >=4) OR (distanceRight >=4)
+ GOSUB Stop_Quickly ' Don't coast backward
+' Make 90 degree turn in direction of the detector which sees black
+ IF (distanceLeft >=4) THEN ' Left detector reads black
+ FOR counter = 1 TO Turn90Degree ' Turn 90 degrees left
+  PULSOUT 13, 750 ' without proportional control
+ PULSOUT 12, 650
+ PAUSE 20 ' so use PAUSE 20
+ NEXT
+ ELSEIF (distanceRight >=4) THEN ' Right detector reads black
+ FOR counter = 1 TO Turn90Degree ' Turn 90 degrees right
+ PULSOUT 13, 850
+ PULSOUT 12, 750
+ PAUSE 20
+ NEXT
+ ENDIF
+' That's it. At this point the Boe-Bot should have turned 90 degrees
+' to follow the intersection. Continue following the black line.
+ RETURN
+Check_For_Intersection:
+' Keep track of no. of pulses vs the forward pulses. If there are less
+' than 30 forward pulses per total of 60 pulses, robot is likely stuck
+' at an intersection.
+ isStuck = 0 ' Initialize Boolean variable
+ numPulses = numPulses + 1 ' Count total pulses sent
+ SELECT numPulses
+ CASE < 60
+ IF (pulseLeft > CenterPulse) THEN
+ fwdPulses = fwdPulses + 1 ' Count forward pulses
+ ENDIF ' (forward is any pulse > 750)
+ CASE = 60 ' If we have sent 60 pulses
+ IF (fwdPulses < 30) THEN ' how many were forward?
+ isStuck = 1 ' If < 30, robot is stuck
+ ENDIF
+ CASE > 60
+ numPulses = 0 ' Reset counters back to zero
+ fwdPulses = 0 ' (Could reset in =60 case but
+ ENDSELECT ' it spoils cool Make_Noise)
+ RETURN
+Make_Noise:
+' Makes an increasing tone, proportional to number of forward pulses
+ FOR counter = 1 TO fwdPulses STEP 3
+ FREQOUT 4, 100, 3800 + (counter * 10)
+ NEXT
+ RETURN
+ Update_LEDs:
+' Use LEDs to indicate whether detectors are seeing black or white.
+' White = Off, Black = On. Black is a distance reading > or = 4 .
+ IF (distanceLeft >= 4) THEN HIGH LeftLED ELSE LOW LeftLED
+ IF (distanceRight >= 4) THEN HIGH RightLED ELSE LOW RightLED
+ RETURN
+Stop_Quickly:
+' This stops the wheels so the Boe-Bot does not "coast" forward.
+ PULSOUT 13, 750
+ PULSOUT 12, 750
+ PAUSE 20
+ RETURN
+Get_Ir_Distances:
+' Read both IR object detectors and calculate the distance.
+' Black line gives 4-5 reading. White surface give 0-1 reading.
+ distanceLeft = 0
+ distanceRight = 0
+ FOR freqSelect = 0 TO 4
+ LOOKUP freqSelect,[37500,38250,39500,40500,41500], irFrequency
+ FREQOUT 8,1,irFrequency
+ irDetectLeft = IN9
+ distanceLeft = distanceLeft + irDetectLeft
+ FREQOUT 2,1,irFrequency
+ irDetectRight = IN0
+ distanceRight = distanceRight + irDetectRight
+ NEXT
+ RETURN
+Send_Pulse:
+' Send a single pulse to the servos in between IR readings.
+ PULSOUT 13,pulseLeft
+ PULSOUT 12,pulseRight
+ PAUSE 5 ' PAUSE reduced due to IR readings
+ RETURN
