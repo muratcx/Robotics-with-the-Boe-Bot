@@ -19,7 +19,7 @@ DO
     irDetectRight = IN0
 
 
-          IF (irDetectLeft = 0) OR (irDetectRight = 0) THEN
+          IF (irDetectLeft = 0) AND (irDetectRight = 0) THEN
 
           pulseGrip = 1000
 
