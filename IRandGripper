@@ -1,0 +1,40 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+DEBUG "Program Running!"
+
+irDetectLeft VAR Bit
+irDetectRight VAR Bit
+pulseLeft VAR Word
+pulseRight VAR Word
+pulseGrip   VAR   Word
+
+FREQOUT 4, 2000, 3000
+
+DO
+
+    FREQOUT 8, 1, 38500
+    irDetectLeft = IN9
+    FREQOUT 2, 1, 38500
+    irDetectRight = IN0
+
+
+          IF (irDetectLeft = 0) OR (irDetectRight = 0) THEN
+
+          pulseGrip = 1000
+
+
+          ELSE
+
+          pulseGrip = 500
+
+          ENDIF
+          PAUSE 20
+
+
+
+        PULSOUT 13,pulseLeft
+        PULSOUT 12,pulseRight
+        PULSOUT 14,pulseGrip
+
+LOOP
