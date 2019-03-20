@@ -21,15 +21,16 @@ DO
 
           IF (irDetectLeft = 0) AND (irDetectRight = 0) THEN
 
-          pulseGrip = 1250
+          pulseGrip = 600
           ELSE
 
-          pulseGrip = 50
+          pulseGrip = 200
           ENDIF
 
         PAUSE 20
 
-
+      PULSOUT 13,pulseLeft
+      PULSOUT 12,pulseRight
       PULSOUT 14,pulseGrip
 
 LOOP
