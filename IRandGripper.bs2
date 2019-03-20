@@ -1,3 +1,9 @@
+-----------------------------------------------------------------------------------------------------------------
+** You will probably have to change the numbers for pulseGrip to match your servo positions **
+** 600 and 200 worked best for me, the servo wouldn't overextend itself and begin to "hum." **
+-----------------------------------------------------------------------------------------------------------------
+
+
 ' {$STAMP BS2}
 ' {$PBASIC 2.5}
 
