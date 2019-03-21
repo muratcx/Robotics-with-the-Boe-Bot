@@ -1,0 +1,67 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+FreqDetectable    CON    3000
+
+C6                CON    1047
+D6                CON    1175
+E6                CON    1319
+F6                CON    1397
+G6                CON    1568
+A6                CON    1760
+B6                CON    1976
+
+C6s               CON    1109
+D6s               CON    1245
+F6s               CON    1480
+G6s               CON    1661
+A6s               CON    1865
+
+C7                CON    2093
+D7                CON    2349
+E7                CON    2637
+F7                CON    2793
+G7                CON    3136
+A7                CON    3520
+B7                CON    3951
+
+C7s               CON    2218
+D7s               CON    2489
+E7s               CON    2960
+G7s               CON    3322
+A7s               CON    3729
+
+C8                CON    4186
+
+
+PZ      PIN    4
+
+
+
+FREQOUT  PZ, 500, E6
+PAUSE 50
+FREQOUT  PZ, 500, D6
+PAUSE 50
+FREQOUT  PZ, 500, C6
+PAUSE 50
+FREQOUT  PZ, 500, D6
+PAUSE 50
+FREQOUT  PZ, 500, E6
+PAUSE 50
+FREQOUT  PZ, 500, E6
+PAUSE 50
+FREQOUT  PZ, 500, E6
+PAUSE 50
+PAUSE 250
+FREQOUT  PZ, 500, D6
+PAUSE 50
+FREQOUT  PZ, 500, D6
+PAUSE 50
+FREQOUT  PZ, 500, D6
+PAUSE 100
+FREQOUT  PZ, 500, E6
+PAUSE 50
+FREQOUT  PZ, 500, G6
+PAUSE 50
+FREQOUT  PZ, 500, G6
+PAUSE 50
