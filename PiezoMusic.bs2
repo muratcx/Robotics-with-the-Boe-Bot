@@ -1,3 +1,13 @@
+-------------------------------------------------------------------------------------------------------------------------------------
+
+This is the result of me being bored, its pretty cool.
+This program plays the first part of Mary Had a Little Lamb, you can modify it to play whatever you want.
+I didn't declare every single note on a piano because I don't have a tuner and that would take forever;
+I just used the ones they show on the parallax site. These notes are the most common ones so you can still make some cool stuff.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
 ' {$STAMP BS2}
 ' {$PBASIC 2.5}
 
