@@ -11,3 +11,5 @@ StripeFollowingBoeBot.bs2 is for what we've previously done in class.
 IntersectionsBoeBot.bs2 is the code at the very end of the book; we're probably not going to even use it
 
 IRandGripper.bs2 is for what we're doing in class now.
+
+PiezoMusic.bs2 is just for fun.
