@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------------------------------------------------------------
 
 This is the result of me being bored, its pretty cool.
-This program plays the first part of Mary Had a Little Lamb, you can modify it to play whatever you want.
+This program plays a random melody I created, you can modify it to play whatever you want.
 I didn't declare every single note on a piano because I don't have a tuner and that would take forever;
 I just used the ones they show on the parallax site. These notes are the most common ones so you can still make some cool stuff.
 
@@ -11,7 +11,8 @@ I just used the ones they show on the parallax site. These notes are the most co
 ' {$STAMP BS2}
 ' {$PBASIC 2.5}
 
-FreqDetectable    CON    3000
+note  VAR Word
+beat  CON 500
 
 C6                CON    1047
 D6                CON    1175
@@ -19,7 +20,7 @@ E6                CON    1319
 F6                CON    1397
 G6                CON    1568
 A6                CON    1760
-B6                CON    1976
+Be6               CON    1976
 
 C6s               CON    1109
 D6s               CON    1245
@@ -33,7 +34,7 @@ E7                CON    2637
 F7                CON    2793
 G7                CON    3136
 A7                CON    3520
-B7                CON    3951
+Be7               CON    3951
 
 C7s               CON    2218
 D7s               CON    2489
@@ -46,32 +47,29 @@ C8                CON    4186
 
 PZ      PIN    4
 
+DO
+
+  FREQOUT PZ, beat, E6, A6
+  FREQOUT PZ, beat, D6
+  FREQOUT PZ, beat, G6
+  PAUSE 20
+  FREQOUT PZ, beat, Be6
+  FREQOUT PZ, beat, G6
+  PAUSE 10
+  FREQOUT PZ, beat, D6
+  PAUSE 20
+  FREQOUT PZ, beat, A6
+  PAUSE 30
+  FREQOUT PZ, beat, Be6, G6
+  PAUSE 30
+  FREQOUT PZ, beat, C7
+  FREQOUT PZ, beat, E7
+  FREQOUT PZ, beat, D7
+  PAUSE 20
+  FREQOUT PZ, beat, F6
+  FREQOUT PZ, beat, D7
+  PAUSE 20
+  FREQOUT PZ, beat, D6, E7
 
 
-FREQOUT  PZ, 500, E6
-PAUSE 50
-FREQOUT  PZ, 500, D6
-PAUSE 50
-FREQOUT  PZ, 500, C6
-PAUSE 50
-FREQOUT  PZ, 500, D6
-PAUSE 50
-FREQOUT  PZ, 500, E6
-PAUSE 50
-FREQOUT  PZ, 500, E6
-PAUSE 50
-FREQOUT  PZ, 500, E6
-PAUSE 50
-PAUSE 250
-FREQOUT  PZ, 500, D6
-PAUSE 50
-FREQOUT  PZ, 500, D6
-PAUSE 50
-FREQOUT  PZ, 500, D6
-PAUSE 100
-FREQOUT  PZ, 500, E6
-PAUSE 50
-FREQOUT  PZ, 500, G6
-PAUSE 50
-FREQOUT  PZ, 500, G6
-PAUSE 50
+LOOP
