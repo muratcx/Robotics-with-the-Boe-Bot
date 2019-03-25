@@ -1,0 +1,111 @@
+------------------------------------------------------------------------------------------------------------
+
+I transposed the Song of Storms from The Legend of Zelda from some random website to try to play
+it on the piezospeaker. It actually isn't that bad, it sounds pretty cool
+
+------------------------------------------------------------------------------------------------------------
+
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+note  VAR Word
+beat  CON 500
+
+
+C6                CON    1047
+D6                CON    1175
+E6                CON    1319
+F6                CON    1397
+G6                CON    1568
+A6                CON    1760
+Be6               CON    1976
+
+C6s               CON    1109
+D6s               CON    1245
+F6s               CON    1480
+G6s               CON    1661
+A6s               CON    1865
+
+C7                CON    2093
+D7                CON    2349
+E7                CON    2637
+F7                CON    2793
+G7                CON    3136
+A7                CON    3520
+Be7               CON    3951
+
+C7s               CON    2218
+D7s               CON    2489
+E7s               CON    2960
+G7s               CON    3322
+A7s               CON    3729
+
+C8                CON    4186
+
+
+PZ      PIN    4
+
+DO
+
+  FREQOUT PZ, beat, D6, F6
+  FREQOUT PZ, beat, D7
+  PAUSE 20
+  FREQOUT PZ, beat, D6, F6
+  FREQOUT PZ, beat, D7
+  PAUSE 20
+  FREQOUT PZ, beat, E7
+  PAUSE 10
+  FREQOUT PZ, beat, F7
+  PAUSE 5
+  FREQOUT PZ, beat, E7, F7
+  PAUSE 5
+  FREQOUT PZ, beat, E7, C7
+  FREQOUT PZ, beat, A6
+  FREQOUT PZ, beat, A6
+  PAUSE 5
+  FREQOUT PZ, beat, D6
+  PAUSE 5
+  FREQOUT PZ, beat, F6
+  FREQOUT PZ, beat, G6
+  PAUSE 5
+  FREQOUT PZ, beat, A6
+  PAUSE 20
+  FREQOUT PZ, beat, A6
+  PAUSE 5
+  FREQOUT PZ, beat, D6
+  PAUSE 5
+  FREQOUT PZ, beat, F6, G6
+  PAUSE 5
+  FREQOUT PZ, beat, E6
+  PAUSE 5
+  FREQOUT PZ, beat, D6, F6
+  FREQOUT PZ, beat, D7
+  PAUSE 10
+  FREQOUT PZ, beat, D6, F6
+  FREQOUT PZ, beat, D7
+  PAUSE 20
+  FREQOUT PZ, beat, E7
+  PAUSE 5
+  FREQOUT PZ, beat, F7
+  PAUSE 5
+  FREQOUT PZ, beat, E7, F7
+  PAUSE 5
+  FREQOUT PZ, beat, E7, C7
+  PAUSE 5
+  FREQOUT PZ, beat, A6
+  PAUSE 5
+  FREQOUT PZ, beat, A6
+  PAUSE 5
+  FREQOUT PZ, beat, D6
+  PAUSE 5
+  FREQOUT PZ, beat, F6, G6
+  PAUSE 5
+  FREQOUT PZ, beat, A6
+  PAUSE 20
+  FREQOUT PZ, beat, A6
+  PAUSE 10
+  FREQOUT PZ, beat, D6
+  PAUSE 1000
+
+
+LOOP
