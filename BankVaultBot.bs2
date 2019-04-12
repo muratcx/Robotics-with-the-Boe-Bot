@@ -1,0 +1,109 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+keypress1 VAR Nib 'This variable stores which button was pressed first
+keypress2 VAR Nib 'This variable stores which button was pressed second
+keypress3 VAR Nib 'This variable stores which button was pressed third
+keypress4 VAR Nib 'This variable stores which button was pressed fourth
+
+button1 CON 0 'The first button should connect to pin 0
+button2 CON 1 'The second button should connect to pin 1
+button3 CON 2 'The third button should connect to pin 2
+button4 CON 3 'The fourth button should connect to pin 3
+
+red_LED CON 11 'The red LED should connect to pin 11
+green_LED CON 10 'The green LED should connect to pin 10
+
+' This vault is secured with the code 2-3-1-4
+' To change the vault code, change the values here.
+pincode1 CON 2 'This is the first digit of the pin code
+pincode2 CON 3 'This is the second digit of the pin code
+pincode3 CON 1 'This is the third digit of the pin code
+pincode4 CON 4 'This is the fourth digit of the pin code
+
+DO
+DEBUG CLS, "Enter your 4 digit PIN code."
+
+DO 'This LOOP waits for an initial button press
+LOOP UNTIL IN0 + IN1 + IN2 + IN3 > 0 'The program 'pauses' until activated
+
+IF IN0 = 1 THEN
+  keypress1 = 1
+ELSEIF IN1 = 1 THEN
+  keypress1 = 2
+ELSEIF IN2 = 1 THEN
+  keypress1 = 3
+ELSEIF IN3 = 1 THEN
+  keypress1 = 4
+ENDIF
+
+GOSUB beep
+
+DO
+LOOP UNTIL IN0 + IN1 + IN2 + IN3 > 0
+
+IF IN0 = 1 THEN
+  keypress2 = 1
+ELSEIF IN1 = 1 THEN
+  keypress2 = 2
+ELSEIF IN2 = 1 THEN
+  keypress2 = 3
+ELSEIF IN3 = 1 THEN
+  keypress2 = 4
+ENDIF
+
+GOSUB beep
+
+DO
+LOOP UNTIL IN0 + IN1 + IN2 + IN3 > 0
+
+IF IN0 = 1 THEN
+  keypress3 = 1
+ELSEIF IN1 = 1 THEN
+  keypress3 = 2
+ELSEIF IN2 = 1 THEN
+  keypress3 = 3
+ELSEIF IN3 = 1 THEN
+  keypress3 = 4
+ENDIF
+
+GOSUB beep
+
+DO
+LOOP UNTIL IN0 + IN1 + IN2 + IN3 > 0
+
+IF IN0 = 1 THEN
+  keypress4 = 1
+ELSEIF IN1 = 1 THEN
+  keypress4 = 2
+ELSEIF IN2 = 1 THEN
+  keypress4 = 3
+ELSEIF IN3 = 1 THEN
+  keypress4 = 4
+ENDIF
+
+GOSUB beep
+
+'Activating these lines will reveal the PIN code and the codes entered
+'DEBUG "Code entered is: ", DEC1 keypress1, DEC1 keypress2, DEC1 keypress3,
+'DEC1 keypress4, CR
+'DEBUG "Pin code stored: ", DEC1 pincode1, DEC1 pincode2, DEC1 pincode3,
+'DEC1 pincode4
+
+IF keypress1 = pincode1 AND keypress2 = pincode2 AND keypress3 = pincode3 AND keypress4 = pincode4 THEN
+  DEBUG CLS, "Bank Vault Opened!"
+  HIGH green_LED
+  PAUSE 2000
+  LOW green_LED
+ELSE
+  DEBUG CR, "Codes don't match. Bank Vault Secured."
+ENDIF
+
+PAUSE 2000
+LOOP
+END
+
+beep:
+'High red_LED 'an optional visual cue
+FREQOUT 4, 250, 3000
+'Low red_LED
+RETURN
