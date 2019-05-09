@@ -19,10 +19,15 @@ BankVaultBot.bs2 is for what we've previously done in class.
 BankVaultBotHack.bs2 is for what we're doing in class now.
 
      .--------._
+     
          (`--'       `-.
+         
           `.______      `.
+          
        ___________`__     \
+       
     ,-'           `-.\     |
+    
    //                \|    |\
   (`  .'~~~~~---\     \'   | |
    `-'           )     \   | |
