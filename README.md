@@ -1,8 +1,8 @@
 # Robotics-with-the-Boe-Bot
+
 Robotics with the Boe-Bot PARALLAX INC.
 
 The code for the Boe-Bot that we're working on right now !!!
-
 
 CenterServoP12.bs2 and CenterServoP13.bs2 are used to center servos. 
 
@@ -10,8 +10,10 @@ StripeFollowingBoeBot.bs2 is for what we've previously done in class.
 
 IntersectionsBoeBot.bs2 is the code at the very end of the book; we're probably not going to even use it
 
-IRandGripper.bs2 is for what we we've previously done in class.
+IRandGripper.bs2 is for what we've previously done in class.
 
 PiezoMusic.bs2 PZmusicSongOfStorms is just for fun.
 
-BankVaultBot.bs2 is for what we're doing in class now.
+BankVaultBot.bs2 is for what we've previously done in class.
+
+BankVaultBotHack.bs2 is for what we're doing in class now.
