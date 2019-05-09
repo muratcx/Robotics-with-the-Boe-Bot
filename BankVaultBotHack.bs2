@@ -1,7 +1,7 @@
-------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 This is the code for "hacking" the BankVault. To change the passcode, change
-the digits of VAULT1 to VAULT4 accordingly. 
--------------------------------------------------------------------------------
+the digits of VAULT1 to VAULT4 accordingly. Also, this is written by me so.. yw
+----------------------------------------------------------------------------------
 
 ' {$STAMP BS2}
 ' {$PBASIC 2.5}
