@@ -17,3 +17,15 @@ PiezoMusic.bs2 PZmusicSongOfStorms is just for fun.
 BankVaultBot.bs2 is for what we've previously done in class.
 
 BankVaultBotHack.bs2 is for what we're doing in class now.
+
+
+       ______
+  .---<__. \ \            
+  `---._  \ \ \          
+   ,----`- `.))     
+  / ,--.   )  |     
+ /_/    >     |       
+ |,\__-'      |          
+  \_           \          
+    ~~-___      )          
+          \      \            
